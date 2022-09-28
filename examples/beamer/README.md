@@ -1,16 +1,11 @@
-# nested_navigation_beamer_example
+# Bottom Navigation Bar with Nested Routes (Beamer)
 
-A new Flutter project.
+![Nested Bottom Navigation Preview](../../.github/images/nested-navigation-with-state.gif)
 
-## Getting Started
+## Notes
 
-This project is a starting point for a Flutter application.
+Nested navigation is fully supported using nested `BeamerDelegates`.
 
-A few resources to get you started if this is your first Flutter project:
+See this file for more details:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- [scaffold_with_bottom_nav_bar.dart](lib/src/routing/scaffold_with_bottom_nav_bar.dart)
