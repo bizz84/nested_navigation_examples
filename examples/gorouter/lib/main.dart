@@ -9,7 +9,7 @@ void main() {
 class MyApp extends StatelessWidget {
   MyApp({super.key});
 
-// private navigators
+  // private navigators
   final _rootNavigatorKey = GlobalKey<NavigatorState>();
   final _shellNavigatorKey = GlobalKey<NavigatorState>();
 
@@ -114,11 +114,10 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
   int get _currentIndex => _locationToTabIndex(GoRouter.of(context).location);
 
   void _onItemTapped(BuildContext context, int tabIndex) {
-    if (tabIndex == _currentIndex) {
-      // If the tab hasn't changed, do nothing
-      return;
+    // Only navigate if the tab index has changed
+    if (tabIndex != _currentIndex) {
+      context.go(widget.tabs[tabIndex].initialLocation);
     }
-    context.go(widget.tabs[tabIndex].initialLocation);
   }
 
   @override
