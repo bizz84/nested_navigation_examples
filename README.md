@@ -2,6 +2,9 @@
 
 This is an example app showing how to implement bottom navigation with nested routes using [GoRouter](https://pub.dev/packages/go_router) and [Beamer](https://pub.dev/packages/beamer):
 
+> **Note**
+> Preserve the state of routes: this is not yet implemented as of GoRouter 5.0 (see issue #99124 and the corresponding PR #2650), but works just fine if we use Beamer along with an IndexedStack widget.
+> 
 ![Nested Bottom Navigation Preview](/.github/images/nested-navigation-with-state.gif)
 
 It is based on this article on my website:
