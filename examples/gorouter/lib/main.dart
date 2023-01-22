@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+// ignore: depend_on_referenced_packages
+import 'package:flutter_web_plugins/url_strategy.dart';
 
 void main() {
-  GoRouter.setUrlPathStrategy(UrlPathStrategy.path);
+  // turn off the # in the URLs on the web
+  usePathUrlStrategy();
   runApp(MyApp());
 }
 
