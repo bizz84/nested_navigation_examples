@@ -167,6 +167,12 @@ class RootScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Tab root - $label'),
+        // actions: [
+        //   IconButton(
+        //     icon: const Icon(Icons.abc),
+        //     onPressed: () => Beamer.of(context, root: true).beamToNamed('/b'),
+        //   ),
+        // ],
       ),
       body: Center(
         child: Column(
