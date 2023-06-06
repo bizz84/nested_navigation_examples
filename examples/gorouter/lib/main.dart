@@ -13,15 +13,16 @@ class MyApp extends StatelessWidget {
   MyApp({super.key});
 
   // private navigators
-  final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  final _aNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'a');
-  final _bNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'b');
+  final _shellNavigatorAKey = GlobalKey<NavigatorState>(debugLabel: 'shellA');
+  final _shellNavigatorBKey = GlobalKey<NavigatorState>(debugLabel: 'shellB');
 
   @override
   Widget build(BuildContext context) {
     final goRouter = GoRouter(
       initialLocation: '/a',
-      navigatorKey: _rootNavigatorKey,
+      // * Passing a navigatorKey causes an issue on hot reload:
+      // * https://github.com/flutter/flutter/issues/113757#issuecomment-1518421380
+      // navigatorKey: _rootNavigatorKey, // don't use this
       debugLogDiagnostics: true,
       routes: [
         // Stateful navigation based on:
@@ -32,11 +33,12 @@ class MyApp extends StatelessWidget {
           },
           branches: [
             StatefulShellBranch(
-              navigatorKey: _aNavigatorKey,
+              navigatorKey: _shellNavigatorAKey,
               routes: [
                 GoRoute(
                   path: '/a',
                   pageBuilder: (context, state) => const NoTransitionPage(
+                    key: ValueKey('a'),
                     child: RootScreen(label: 'A', detailsPath: '/a/details'),
                   ),
                   routes: [
@@ -50,12 +52,13 @@ class MyApp extends StatelessWidget {
               ],
             ),
             StatefulShellBranch(
-              navigatorKey: _bNavigatorKey,
+              navigatorKey: _shellNavigatorBKey,
               routes: [
                 // Shopping Cart
                 GoRoute(
                   path: '/b',
                   pageBuilder: (context, state) => const NoTransitionPage(
+                    key: ValueKey('b'),
                     child: RootScreen(label: 'B', detailsPath: '/b/details'),
                   ),
                   routes: [
