@@ -23,7 +23,9 @@ class MyApp extends StatelessWidget {
       initialLocation: '/a',
       // * Passing a navigatorKey causes an issue on hot reload:
       // * https://github.com/flutter/flutter/issues/113757#issuecomment-1518421380
-      navigatorKey: _rootNavigatorKey, // don't use this
+      // * However it's still necessary otherwise the navigator pops back to
+      // * root on hot reload
+      navigatorKey: _rootNavigatorKey,
       debugLogDiagnostics: true,
       routes: [
         // Stateful navigation based on:
