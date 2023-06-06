@@ -14,8 +14,8 @@ class MyApp extends StatelessWidget {
 
   // private navigators
   final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  final _aNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'jobs');
-  final _bNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'entries');
+  final _aNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'a');
+  final _bNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'b');
 
   @override
   Widget build(BuildContext context) {
@@ -31,41 +31,43 @@ class MyApp extends StatelessWidget {
             return ScaffoldWithBottomNavBar(navigationShell: navigationShell);
           },
           branches: [
-            StatefulShellBranch(navigatorKey: _aNavigatorKey, routes: [
-              GoRoute(
-                path: '/a',
-                pageBuilder: (context, state) => NoTransitionPage(
-                  key: state.pageKey,
-                  child:
-                      const RootScreen(label: 'A', detailsPath: '/a/details'),
-                ),
-                routes: [
-                  GoRoute(
-                    path: 'details',
-                    builder: (context, state) =>
-                        const DetailsScreen(label: 'A'),
+            StatefulShellBranch(
+              navigatorKey: _aNavigatorKey,
+              routes: [
+                GoRoute(
+                  path: '/a',
+                  pageBuilder: (context, state) => const NoTransitionPage(
+                    child: RootScreen(label: 'A', detailsPath: '/a/details'),
                   ),
-                ],
-              ),
-            ]),
-            StatefulShellBranch(navigatorKey: _bNavigatorKey, routes: [
-              // Shopping Cart
-              GoRoute(
-                path: '/b',
-                pageBuilder: (context, state) => NoTransitionPage(
-                  key: state.pageKey,
-                  child:
-                      const RootScreen(label: 'B', detailsPath: '/b/details'),
+                  routes: [
+                    GoRoute(
+                      path: 'details',
+                      builder: (context, state) =>
+                          const DetailsScreen(label: 'A'),
+                    ),
+                  ],
                 ),
-                routes: [
-                  GoRoute(
-                    path: 'details',
-                    builder: (context, state) =>
-                        const DetailsScreen(label: 'B'),
+              ],
+            ),
+            StatefulShellBranch(
+              navigatorKey: _bNavigatorKey,
+              routes: [
+                // Shopping Cart
+                GoRoute(
+                  path: '/b',
+                  pageBuilder: (context, state) => const NoTransitionPage(
+                    child: RootScreen(label: 'B', detailsPath: '/b/details'),
                   ),
-                ],
-              ),
-            ]),
+                  routes: [
+                    GoRoute(
+                      path: 'details',
+                      builder: (context, state) =>
+                          const DetailsScreen(label: 'B'),
+                    ),
+                  ],
+                ),
+              ],
+            ),
           ],
         ),
       ],
