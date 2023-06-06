@@ -14,13 +14,17 @@ class MyApp extends StatelessWidget {
 
   // private navigators
   final _rootNavigatorKey = GlobalKey<NavigatorState>();
-  final _aNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'a');
-  final _bNavigatorKey = GlobalKey<NavigatorState>(debugLabel: 'b');
+  final _shellNavigatorAKey = GlobalKey<NavigatorState>(debugLabel: 'shellA');
+  final _shellNavigatorBKey = GlobalKey<NavigatorState>(debugLabel: 'shellB');
 
   @override
   Widget build(BuildContext context) {
     final goRouter = GoRouter(
       initialLocation: '/a',
+      // * Passing a navigatorKey causes an issue on hot reload:
+      // * https://github.com/flutter/flutter/issues/113757#issuecomment-1518421380
+      // * However it's still necessary otherwise the navigator pops back to
+      // * root on hot reload
       navigatorKey: _rootNavigatorKey,
       debugLogDiagnostics: true,
       routes: [
@@ -32,7 +36,7 @@ class MyApp extends StatelessWidget {
           },
           branches: [
             StatefulShellBranch(
-              navigatorKey: _aNavigatorKey,
+              navigatorKey: _shellNavigatorAKey,
               routes: [
                 GoRoute(
                   path: '/a',
@@ -50,7 +54,7 @@ class MyApp extends StatelessWidget {
               ],
             ),
             StatefulShellBranch(
-              navigatorKey: _bNavigatorKey,
+              navigatorKey: _shellNavigatorBKey,
               routes: [
                 // Shopping Cart
                 GoRoute(
@@ -105,16 +109,13 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: navigationShell,
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: navigationShell.currentIndex,
-        items: const [
-          // products
-          BottomNavigationBarItem(label: 'Section A', icon: Icon(Icons.home)),
-          BottomNavigationBarItem(
-              label: 'Section B', icon: Icon(Icons.settings)),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: navigationShell.currentIndex,
+        destinations: const [
+          NavigationDestination(label: 'Section A', icon: Icon(Icons.home)),
+          NavigationDestination(label: 'Section B', icon: Icon(Icons.settings)),
         ],
-        onTap: (index) => _tap(context, index),
+        onDestinationSelected: (index) => _tap(context, index),
       ),
     );
   }

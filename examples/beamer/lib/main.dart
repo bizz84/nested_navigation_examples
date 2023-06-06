@@ -132,14 +132,13 @@ class _ScaffoldWithBottomNavBarState extends State<ScaffoldWithBottomNavBar> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _currentIndex,
-        items: const [
-          BottomNavigationBarItem(label: 'Section A', icon: Icon(Icons.home)),
-          BottomNavigationBarItem(
-              label: 'Section B', icon: Icon(Icons.settings)),
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _currentIndex,
+        destinations: const [
+          NavigationDestination(label: 'Section A', icon: Icon(Icons.home)),
+          NavigationDestination(label: 'Section B', icon: Icon(Icons.settings)),
         ],
-        onTap: (index) {
+        onDestinationSelected: (index) {
           if (index != _currentIndex) {
             setState(() => _currentIndex = index);
             _routerDelegates[_currentIndex].update(rebuild: false);
