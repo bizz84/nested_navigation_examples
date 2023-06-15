@@ -1,10 +1,10 @@
-# Bottom Navigation Bar with Nested Routes (Beamer)
+# Stateful Nested Navigation with Beamer
 
 ![Nested Bottom Navigation Preview](../../.github/images/nested-navigation-with-state.gif)
 
 ## Notes
 
-Nested navigation is fully supported using nested `BeamerDelegates`.
+Stateful nested navigation is fully supported using nested `BeamerDelegates`.
 
 See this file for more details:
 
