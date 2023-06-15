@@ -94,7 +94,7 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
   }) : super(key: key ?? const ValueKey<String>('ScaffoldWithBottomNavBar'));
   final StatefulNavigationShell navigationShell;
 
-  void _tap(BuildContext context, int index) {
+  void _goBranch(int index) {
     navigationShell.goBranch(
       index,
       // A common pattern when using bottom navigation bars is to support
@@ -115,7 +115,7 @@ class ScaffoldWithBottomNavBar extends StatelessWidget {
           NavigationDestination(label: 'Section A', icon: Icon(Icons.home)),
           NavigationDestination(label: 'Section B', icon: Icon(Icons.settings)),
         ],
-        onDestinationSelected: (index) => _tap(context, index),
+        onDestinationSelected: _goBranch,
       ),
     );
   }
